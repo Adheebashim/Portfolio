@@ -221,6 +221,27 @@
   </div>
 </section><!-- End Resume Section -->
 
+<style>
+  /* CSS for the portfolio section */
+  .portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .portfolio-item {
+    position: relative;
+    transition: all 0.3s ease; /* Add a smooth transition effect for all properties */
+    transform: scale(1); /* Initialize transform with no scaling */
+  }
+
+  .portfolio-item:hover {
+    border: 2px solid #007BFF; /* Define the border style and color for the hover effect */
+    transform: scale(1.05); /* Apply scaling on hover */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+  }
+</style>
+
+
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio section-bg">
   <div class="container">
@@ -229,79 +250,53 @@
       <p>Explore my portfolio, where data meets innovation. Through a collection of projects, I showcase my journey in AI and Machine Learning. Witness the impact of data-driven insights and solutions. Join me in the world of possibilities.</p>
     </div>
 
-    <!-- <div class="row" data-aos="fade-up"> -->
-      <!-- <div class="col-lg-12 d-flex justify-content-center">
-        <ul id="portfolio-flters">
-          <li data-filter="*" class="filter-active">All</li>
-          <li data-filter=".filter-app">Machine Learning</li>
-          <li data-filter=".filter-card">Deep Learning</li>
-        </ul>
-      </div>
-    </div> -->
-
-    
-    <div style="margin-left: 90px; width: 1050px; height: 1050px;" class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
       <!-- Portfolio Item 1 (with the entire tile clickable) -->
-      <a href="portfolio-details.html" title="More Details">
-        <div style="border: 1px solid; border-radius: 10px; margin-right:25px;" class="col-lg-3 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img style="border-radius: 10px;" src="assets\img\portfolio\spam_dp.jpg" class="img-fluid" alt="Spam Classifier">
-            <div class="portfolio-info">
-              <h4 style="font-size: medium; text-align: center;">Spam Classifier</h4>
-              <div class="portfolio-links">
-            
-              </div>
-            </div>
+      <a href="portfolio-details.html" title="More Details" class="col-lg-3 col-md-6 col-sm-12 portfolio-item filter-app">
+        <div class="portfolio-wrap">
+          <img src="assets\img\portfolio\spam_dp.jpg" class="img-fluid" alt="Spam Classifier">
+          <div class="portfolio-info">
+            <h4 style="font-size: large; text-align: center;color: black;">Spam Classifier</h4>
           </div>
         </div>
       </a>
 
       <!-- Portfolio Item 2 (with the entire tile clickable) -->
-      <a href="project_2.html" title="More Details">
-        <div style="border: 1px solid; border-radius: 10px;" class="col-lg-3 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img style="border-radius: 10px;" src="assets/img/portfolio/pdf_dp.jpg" class="img-fluid" alt="Interact With PDF">
-            <div class="portfolio-info">
-              <h4 style="font-size: medium; text-align: center;">Interact With PDF</h4>
-              <div class="portfolio-links">
-                
-              </div>
-            </div>
+      <a href="project_2.html" title="More Details" class="col-lg-3 col-md-6 col-sm-12 portfolio-item filter-card">
+        <div class="portfolio-wrap">
+          <img src="assets/img/portfolio/pdf_dp.jpg" class="img-fluid" alt="Interact With PDF">
+          <div class="portfolio-info">
+            <h4 style="font-size: large; text-align: center;color: black;">Interact With PDF</h4>
           </div>
         </div>
       </a>
 
       <!-- Portfolio Item 3 (with the entire tile clickable) -->
-      <a href="project_3.html" title="More Details">
-        <div style="border: 1px solid; border-radius: 10px;" class="col-lg-3 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img style="border-radius: 10px;" src="assets\img\portfolio\dog_dp.jpg" class="img-fluid" alt="Dog Breed Identifier">
-            <div class="portfolio-info">
-              <h4 style="font-size: medium; text-align: center;">Dog Breed Identifier</h4>
-              <div class="portfolio-links">
-              
-              </div>
-            </div>
+      <a href="project_3.html" title="More Details" class="col-lg-3 col-md-6 col-sm-12 portfolio-item filter-card">
+        <div class="portfolio-wrap">
+          <img src="assets\img\portfolio\dog_dp.jpg" class="img-fluid" alt="Dog Breed Identifier">
+          <div class="portfolio-info">
+            <h4 style="font-size: large; text-align: center; color: black;">Dog Breed Identifier</h4>
           </div>
         </div>
       </a>
 
-       <!-- Portfolio Item 4 (with the entire tile clickable) -->
-      <a href="project_4.html" title="More Details">
-        <div style="border: 1px solid; border-radius: 10px;" class="col-lg-3 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img style="border-radius: 10px;" src="assets\img\portfolio\hrt_dp2.jpg" class="img-fluid" alt="Dog Breed Identifier">
-            <div class="portfolio-info">
-              <h4 style="font-size: medium; text-align: center;">Heart Disease Prediction</h4>
-              <div class="portfolio-links">
-              </div>
-            </div>
+      <!-- Portfolio Item 4 (with the entire tile clickable) -->
+      <a href="project_4.html" title="More Details" class="col-lg-3 col-md-6 col-sm-12 portfolio-item filter-card">
+        <div class="portfolio-wrap">
+          <img src="assets\img\portfolio\hrt_dp2.jpg" class="img-fluid" alt="Heart Disease Prediction">
+          <div class="portfolio-info">
+            <h4 style="font-size: large; text-align: center;color: black;">Heart Disease Prediction</h4>
           </div>
         </div>
       </a>
-     
-      
-      <!-- Add more portfolio items here as needed -->
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
 
     </div>
   </div>
