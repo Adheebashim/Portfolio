@@ -1,0 +1,14 @@
+# =============================================
+#  SECURITY — Never commit credentials to Git
+# =============================================
+
+# API Keys & Secrets
+credentials.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/

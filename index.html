@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adheeb Ashim | Tech Consultant & Developer</title>
+    <meta name="description" content="Adheeb Ashim — Data & AI Engineer specializing in Machine Learning, Analytics, and Scalable Web Solutions. Hire for freelance web development, AI automation, and data engineering projects.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Animated Particle Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Background Elements -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+    <div class="hero-grid-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Adheeb Ashim</a>
+            <div class="nav-links" id="nav-links">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact" class="btn btn-outline nav-btn">Hire Me</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero section">
+            <div class="container">
+                <div class="hero-split">
+                    <!-- Left: Text Content -->
+                    <div class="hero-left">
+                        <span class="badge fade-up">Available for New Opportunities</span>
+                        <h1 class="hero-title fade-up delay-1">
+                            <span class="hero-name-main">Adheeb Ashim</span>
+                            <span class="hero-roles">
+                                <span class="hero-role-tag">Data Engineer</span>
+                                <span class="hero-role-dot">·</span>
+                                <span class="hero-role-tag">AI Developer</span>
+                                <span class="hero-role-dot">·</span>
+                                <span class="hero-role-tag">Data Analyst</span>
+                            </span>
+                        </h1>
+                        <p class="hero-desc fade-up delay-2">
+                            I build intelligent solutions at the intersection of <strong>Data</strong>, <strong>AI</strong>, and <strong>Engineering</strong>. From ML pipelines to scalable web apps &mdash; I turn complex problems into impactful digital products.
+                        </p>
+                        <div class="hero-cta fade-up delay-3">
+                            <a href="#services" class="btn btn-primary btn-hero"><i class='bx bx-rocket'></i> Explore My Work</a>
+                            <a href="#contact" class="btn btn-secondary btn-hero">Get in Touch <i class='bx bx-right-arrow-alt'></i></a>
+                        </div>
+                        <div class="hero-metrics fade-up delay-3">
+                            <div class="hero-metric">
+                                <span class="hero-metric-num">2+</span>
+                                <span class="hero-metric-label">Years Experience</span>
+                            </div>
+                            <div class="hero-metric-sep"></div>
+                            <div class="hero-metric">
+                                <span class="hero-metric-num">10+</span>
+                                <span class="hero-metric-label">Projects Shipped</span>
+                            </div>
+                            <div class="hero-metric-sep"></div>
+                            <div class="hero-metric">
+                                <span class="hero-metric-num">3</span>
+                                <span class="hero-metric-label">AI Tools Built</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Profile Image -->
+                    <div class="hero-right fade-up delay-2">
+                        <div class="profile-showcase" id="profile-showcase">
+                            <div class="profile-glow"></div>
+                            <div class="profile-image-wrapper">
+                                <img src="./image/IMG_6984.JPG" alt="Adheeb Ashim" class="profile-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator fade-up delay-3">
+                <div class="mouse"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- Tech Stack Marquee -->
+        <div class="tech-marquee">
+            <div class="marquee-track">
+                <span class="marquee-item"><i class='bx bxl-python'></i> Python</span>
+                <span class="marquee-item"><i class='bx bxl-javascript'></i> JavaScript</span>
+                <span class="marquee-item"><i class='bx bxl-react'></i> React</span>
+                <span class="marquee-item"><i class='bx bx-data'></i> SQL</span>
+                <span class="marquee-item"><i class='bx bx-cloud'></i> AWS</span>
+                <span class="marquee-item"><i class='bx bx-brain'></i> TensorFlow</span>
+                <span class="marquee-item"><i class='bx bxl-firebase'></i> Firebase</span>
+                <span class="marquee-item"><i class='bx bx-bar-chart-alt-2'></i> Power BI</span>
+                <span class="marquee-item"><i class='bx bxl-nodejs'></i> Node.js</span>
+                <span class="marquee-item"><i class='bx bxl-git'></i> Git</span>
+                <span class="marquee-item"><i class='bx bx-chip'></i> Machine Learning</span>
+                <span class="marquee-item"><i class='bx bx-bot'></i> LLMs & NLP</span>
+                <!-- Duplicate for infinite loop -->
+                <span class="marquee-item"><i class='bx bxl-python'></i> Python</span>
+                <span class="marquee-item"><i class='bx bxl-javascript'></i> JavaScript</span>
+                <span class="marquee-item"><i class='bx bxl-react'></i> React</span>
+                <span class="marquee-item"><i class='bx bx-data'></i> SQL</span>
+                <span class="marquee-item"><i class='bx bx-cloud'></i> AWS</span>
+                <span class="marquee-item"><i class='bx bx-brain'></i> TensorFlow</span>
+                <span class="marquee-item"><i class='bx bxl-firebase'></i> Firebase</span>
+                <span class="marquee-item"><i class='bx bx-bar-chart-alt-2'></i> Power BI</span>
+                <span class="marquee-item"><i class='bx bxl-nodejs'></i> Node.js</span>
+                <span class="marquee-item"><i class='bx bxl-git'></i> Git</span>
+                <span class="marquee-item"><i class='bx bx-chip'></i> Machine Learning</span>
+                <span class="marquee-item"><i class='bx bx-bot'></i> LLMs & NLP</span>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="badge" style="margin-bottom: 16px;">What I Do</span>
+                    <h2 class="section-title">Core Competencies</h2>
+                    <p class="section-subtitle">Comprehensive technical expertise tailored to solve complex business operations and scale digital infrastructure.</p>
+                </div>
+                
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card fade-up delay-1">
+                        <div class="service-icon">
+                            <i class='bx bx-laptop'></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>End-to-end modern web applications. From stunning, responsive front-ends focusing on UI/UX to robust, scalable backend architectures.</p>
+                        <ul class="service-features">
+                            <li><i class='bx bx-check'></i> Custom Landing Pages</li>
+                            <li><i class='bx bx-check'></i> Full-stack Applications</li>
+                            <li><i class='bx bx-check'></i> Performance Optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card fade-up delay-2">
+                        <div class="service-icon">
+                            <i class='bx bx-brain'></i>
+                        </div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>From predictive modeling to generative AI, I build intelligent systems that streamline workflows and uncover deep operational efficiencies.</p>
+                        <ul class="service-features">
+                            <li><i class='bx bx-check'></i> Custom LLM Integration</li>
+                            <li><i class='bx bx-check'></i> Machine Learning Models</li>
+                            <li><i class='bx bx-check'></i> NLP & Chatbots</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card fade-up delay-3">
+                        <div class="service-icon">
+                            <i class='bx bx-data'></i>
+                        </div>
+                        <h3>Data Engineering & Analytics</h3>
+                        <p>Transforming raw, fragmented datasets into actionable business intelligence through robust ETL pipelines, complex analytics, and interactive dashboards.</p>
+                        <ul class="service-features">
+                            <li><i class='bx bx-check'></i> Scalable Data Pipelines</li>
+                            <li><i class='bx bx-check'></i> Advanced Data Analytics</li>
+                            <li><i class='bx bx-check'></i> Interactive BI Dashboards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work/Projects Section -->
+        <section id="work" class="section bg-alt">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="badge" style="margin-bottom: 16px;">Portfolio</span>
+                    <h2 class="section-title">Selected Work</h2>
+                    <p class="section-subtitle">Real-world projects showcasing technical depth and business impact.</p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row fade-up">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="10">0+</div>
+                        <div class="stat-label">Projects Shipped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2">0+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5">0+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="3">0</div>
+                        <div class="stat-label">AI Tools Built</div>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Project 1: AI ATS Optimizer Tool -->
+                    <div class="project-card fade-up">
+                        <div class="project-content">
+                            <span class="project-tag">AI Tool</span>
+                            <h3>AI ATS Resume Optimizer</h3>
+                            <p>A browser-based AI tool for generating ATS-optimized resumes, tailored cover letters, and targeted cold emails using free-tier API keys from Google Gemini, Groq & Cohere.</p>
+                            <a href="./tools/ats-optimizer/ats.html" class="btn btn-outline" style="margin-top: 24px;">Try the Tool <i class='bx bx-magic-wand'></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: PowerPlus Electronics -->
+                    <div class="project-card fade-up delay-1">
+                        <div class="project-content">
+                            <span class="project-tag">Web Development</span>
+                            <h3>PowerPlus Electronics</h3>
+                            <p>An e-commerce and product showcase platform built for an electronics supplier, featuring a clean user interface and responsive product grid design.</p>
+                            <a href="https://powerpluselectronics.netlify.app/" target="_blank" class="btn btn-outline" style="margin-top: 24px;">View Project <i class='bx bx-link-external'></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: CRM Facility Management -->
+                    <div class="project-card fade-up delay-2">
+                        <div class="project-content">
+                            <span class="project-tag">Web Development</span>
+                            <h3>CRM Facility Management</h3>
+                            <p>A comprehensive customer relationship and facility management system designed to streamline business operations and enhance client interactions.</p>
+                            <a href="https://crm-facility-management.web.app/" target="_blank" class="btn btn-outline" style="margin-top: 24px;">View Project <i class='bx bx-link-external'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="badge" style="margin-bottom: 16px;">Career</span>
+                    <h2 class="section-title">Professional Background</h2>
+                    <p class="section-subtitle">Industry experience delivering scalable data and software solutions.</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Data Operational Analyst</h3>
+                                <span class="timeline-date">July 2024 - Present</span>
+                            </div>
+                            <span class="timeline-company">NielsenIQ</span>
+                            <p>Managing daily data operations for major US brands. Built automated tools and dashboards (Power Apps, VBA) resulting in significant efficiency gains across the team workflow.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Data R&D Intern</h3>
+                                <span class="timeline-date">Dec 2023 - June 2024</span>
+                            </div>
+                            <span class="timeline-company">Vyza Solutions</span>
+                            <p>Researched and developed intelligent text-based chatbot systems, mapped functional use cases, and contributed to product iteration and testing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section cta-section">
+            <div class="container">
+                <div class="cta-box fade-up">
+                    <h2>Ready to elevate your business?</h2>
+                    <p>Let's discuss how customized Web, AI, and Data solutions can drive your success.</p>
+                    <button id="open-contact-modal" class="btn btn-glow btn-large">Start a Conversation</button>
+                    <div class="contact-methods">
+                        <a href="mailto:adheebashim1010@gmail.com"><i class='bx bx-envelope'></i> adheebashim1010@gmail.com</a>
+                        <a href="tel:+918281759103"><i class='bx bx-phone'></i> +91 8281759103</a>
+                        <a href="https://wa.me/918281759103" target="_blank"><i class='bx bxl-whatsapp'></i> WhatsApp</a>
+                        <a href="https://www.linkedin.com/in/adheeb-hashim/" target="_blank"><i class='bx bxl-linkedin'></i> LinkedIn</a>
+                        <span><i class='bx bx-map'></i> Global / Remote (Kerala, IN)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Adheeb Ashim. Built with precision.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Assistant -->
+    <div id="chatbot-container" class="chatbot-container">
+        <!-- Chat Window -->
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar" style="overflow: hidden; padding: 0;">
+                        <img src="./image/IMG_6984.JPG" alt="Adheeb" style="width: 100%; height: 100%; object-fit: cover;">
+                        <span class="status-dot" style="z-index: 2;"></span>
+                    </div>
+                    <div>
+                        <h4>Adheeb's AI</h4>
+                        <p>Ask me anything!</p>
+                    </div>
+                </div>
+                <div class="chat-header-actions">
+                    <button id="clear-chat" class="chat-action-btn" title="Clear Chat"><i class='bx bx-trash'></i></button>
+                    <button id="close-chat" class="chat-action-btn" title="Close Chat"><i class='bx bx-x'></i></button>
+                </div>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="chat-message ai-message fade-in">
+                    <div class="msg-content">
+                        Hi there! 👋 I'm Adheeb's AI Assistant. You can ask me about his skills, experience, or how to get in touch!
+                    </div>
+                </div>
+            </div>
+            <div class="chat-quick-replies" id="quick-replies">
+                <span class="quick-reply">What are your skills?</span>
+                <span class="quick-reply">Tell me about your projects.</span>
+                <span class="quick-reply">How can I hire you?</span>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                <button id="send-chat" class="chat-send-btn"><i class='bx bx-send'></i></button>
+            </div>
+        </div>
+        
+        <!-- Floating Action Button -->
+        <button id="chatbot-fab" class="chatbot-fab pulse-glow">
+            <i class='bx bx-message-rounded-dots'></i>
+        </button>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="modal-close"><i class='bx bx-x'></i></button>
+            <h3 class="modal-title">How would you like to connect?</h3>
+            <p class="modal-subtitle">Choose your preferred communication channel.</p>
+            
+            <div class="modal-options">
+                <!-- Calendly Highlighted CTA -->
+                <a href="#" target="_blank" class="modal-btn calendly-cta">
+                    <div class="modal-icon calendly-icon"><i class='bx bx-calendar'></i></div>
+                    <div class="modal-text">
+                        <h4>Book a Discovery Call</h4>
+                        <span>Find a time on my Calendly</span>
+                    </div>
+                </a>
+
+                <a href="mailto:adheebashim1010@gmail.com" class="modal-btn">
+                    <div class="modal-icon email-icon"><i class='bx bx-envelope'></i></div>
+                    <div class="modal-text">
+                        <h4>Email</h4>
+                        <span>adheebashim1010@gmail.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://wa.me/918281759103" target="_blank" class="modal-btn">
+                    <div class="modal-icon wa-icon"><i class='bx bxl-whatsapp'></i></div>
+                    <div class="modal-text">
+                        <h4>WhatsApp</h4>
+                        <span>Chat instantly</span>
+                    </div>
+                </a>
+                
+                <a href="tel:+918281759103" class="modal-btn">
+                    <div class="modal-icon phone-icon"><i class='bx bx-phone'></i></div>
+                    <div class="modal-text">
+                        <h4>Phone Call</h4>
+                        <span>+91 8281759103</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Credentials (DO NOT commit this file) -->
+    <script src="./credentials.js"></script>
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Application Logic -->
+    <script src="./app.js"></script>
+</body>
+</html>

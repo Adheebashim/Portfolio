@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI ATS Resume Optimizer | Adheeb Ashim</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Document Parsers & Exporters -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
+    
+    <!-- PDFMake Vector Generation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .ats-container {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        #help-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        #help-modal {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            margin: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        
+        #help-modal::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+        }
+        
+        .ats-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .ats-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+            height: 150px;
+        }
+        
+        .form-control::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .form-control::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .form-control::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        
+        .form-control::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        select.form-control option {
+            background-color: #111827; /* Dark background to fix white-text invisibility */
+            color: #ffffff;
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        .api-config {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 600px) {
+            .api-config {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #output-container {
+            display: none;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .markdown-output {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .markdown-output h1, .markdown-output h2, .markdown-output h3 {
+            color: var(--text-main);
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .markdown-output p {
+            margin-bottom: 16px;
+        }
+
+        .markdown-output ul {
+            list-style: disc;
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .markdown-output li {
+            margin-bottom: 8px;
+        }
+
+        .loader {
+            display: none;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        #error-msg {
+            color: #ef4444;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* --- V3 ATS Redesign Styles --- */
+        .wizard-step {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .wizard-step-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .wizard-step-number {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.01);
+            margin-bottom: 15px;
+        }
+        
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: inset 0 0 15px rgba(37, 99, 235, 0.1);
+        }
+        
+        .drop-zone i {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .drop-zone:hover i {
+            color: var(--primary);
+        }
+        
+        .generate-btn-lg {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .generate-btn-lg:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Subtle Background Elements -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <div class="container">
+        <div class="ats-container fade-up" style="opacity: 1; transform: none;">
+            <button id="help-btn" class="btn btn-outline" title="Help & Information"><i class='bx bx-question-mark'></i></button>
+            <div class="ats-header">
+                <h1>AI Resume Optimizer</h1>
+                <p>Generate ATS-optimized resumes, cover letters & cold emails using your own free AI API key.</p>
+                <a href="../../index.html" style="color: var(--primary); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;">
+                    <i class='bx bx-arrow-back'></i> Back to Portfolio
+                </a>
+            </div>
+
+            <!-- Step 1: Configuration Engine -->
+            <div class="wizard-step">
+                <div class="wizard-step-title">
+                    <span class="wizard-step-number">1</span> System Configuration
+                </div>
+                
+                <!-- API Configuration (Collapsible) -->
+                <details style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border); border-radius: 12px; padding: 15px;">
+                    <summary style="cursor: pointer; font-weight: 500; font-size: 1rem; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+                        <i class='bx bx-cog'></i> AI API Configuration & Keys
+                    </summary>
+                    <div class="api-config" style="margin-top: 20px; margin-bottom: 0; border: none; padding: 0; background: transparent;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="ai-provider">AI Provider</label>
+                            <select id="ai-provider" class="form-control" style="background-color: #111827; color: #ffffff;">
+                                <option value="gemini" style="background-color: #111827; color: #ffffff;">Google Gemini</option>
+                                <option value="groq" style="background-color: #111827; color: #ffffff;">Groq</option>
+                                <option value="cohere" style="background-color: #111827; color: #ffffff;">Cohere</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="ai-model">Select Model</label>
+                            <select id="ai-model" class="form-control" style="background-color: #111827; color: #ffffff;">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0; grid-column: 1 / -1; margin-top: 8px;">
+                            <label for="api-key">API Key</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="password" id="api-key" class="form-control" placeholder="Enter your API Key here...">
+                                <button id="test-api-btn" class="btn btn-outline" style="white-space: nowrap; padding: 0 20px;">
+                                    Test
+                                </button>
+                            </div>
+                            <small style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 8px;">Key is saved locally in your browser and never sent to our servers.</small>
+                            <small style="font-size: 0.85rem; display: block; margin-top: 6px;">
+                                <a id="api-help-anchor" href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary); text-decoration: none; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; display: inline-block; transition: all 0.2s;">Get a free Google Gemini API Key <i class='bx bx-link-external'></i></a>
+                            </small>
+                            <small id="api-status" style="display: block; margin-top: 5px; font-weight: 500; font-size: 0.9rem;"></small>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="gen-type">Output Document Generation Type</label>
+                    <select id="gen-type" class="form-control" style="background-color: #111827; color: #ffffff;">
+                        <option value="resume" style="background-color: #111827; color: #ffffff;">ATS Optimized Resume (Vector Magic)</option>
+                        <option value="cover-letter" style="background-color: #111827; color: #ffffff;">Tailored Cover Letter (250 Words)</option>
+                        <option value="cold-email" style="background-color: #111827; color: #ffffff;">Targeted Cold Email (Outreach Mode)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 2: Input Layer -->
+            <div class="wizard-step">
+                <div class="wizard-step-title">
+                    <span class="wizard-step-number">2</span> Cross-Reference Inputs
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="job-description"><i class='bx bx-target-lock'></i> Target Job Description</label>
+                    <textarea id="job-description" class="form-control" placeholder="Paste the exact full job requirements here to act as the AI keyword map..."></textarea>
+                </div>
+                
+                <details style="margin-bottom: 25px;">
+                    <summary style="cursor: pointer; color: var(--text-muted); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;"><i class='bx bx-message-square-add'></i> Add Custom Prompts / Rules</summary>
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 0;">
+                        <textarea id="additional-context" class="form-control" placeholder="Give the AI custom directions:&#10;&#10;- Highlight my leadership in XYZ&#10;- Emphasize Python experience&#10;- Format heavily around AWS..."></textarea>
+                    </div>
+                </details>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="current-resume"><i class='bx bx-file'></i> Active Profile / Base Resume</label>
+                    
+                    <div id="drop-zone" class="drop-zone">
+                        <i class='bx bx-cloud-upload'></i>
+                        <p style="margin: 0; font-weight: 500; font-size: 1.1rem; color: var(--text-main);">Drag & Drop your Base Resume here</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-muted);">or click to browse (.pdf, .docx)</p>
+                        <input type="file" id="resume-upload" accept=".pdf,.docx" style="display: none;">
+                    </div>
+                    
+                    <textarea id="current-resume" class="form-control" placeholder="... or seamlessly drop your raw text directly into this field."></textarea>
+                </div>
+            </div>
+
+            <!-- Step 3: Trigger -->
+            <div class="wizard-step" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                <button id="generate-btn" class="generate-btn-lg">
+                    <i class='bx bx-magic-wand'></i> INITIALIZE OPTIMIZATION
+                    <i class='bx bx-loader-alt loader' id="btn-loader"></i>
+                </button>
+                <div id="error-msg"></div>
+            </div>
+
+            <!-- Output Container -->
+            <div id="output-container">
+                <div class="output-header" style="background: var(--card-bg); z-index: 5; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <h2 style="margin: 0; font-size: 1.5rem;">Live Artifact</h2>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button id="copy-btn" class="btn btn-outline" style="padding: 8px 12px; font-size: 0.85rem;" title="Copy to Clipboard">
+                            <i class='bx bx-copy'></i> <span class="btn-text">Copy</span>
+                        </button>
+                        <button id="download-pdf-btn" class="btn btn-outline" style="padding: 8px 12px; font-size: 0.85rem;" title="Download as Native PDF">
+                            <i class='bx bxs-file-pdf'></i> <span class="btn-text">PDF</span>
+                        </button>
+                        <button id="download-word-btn" class="btn btn-outline" style="padding: 8px 12px; font-size: 0.85rem;" title="Download JSON Data Source">
+                            <i class='bx bx-code-alt'></i> <span class="btn-text">JSON</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="resume-output" style="background: white; color: black; padding: 40px; border-radius: 10px; text-align: left; overflow-x: auto; margin-top: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <dialog id="help-modal">
+        <h2 style="margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">How to Use this Tool</h2>
+        <div style="font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 25px;">
+            <p style="margin-bottom: 10px;"><strong>1. Get a Free API Key:</strong> You need an API key to securely generate resumes in your browser. Choose a provider like Google Gemini, click the link to claim a free key, and paste it in the settings toggle above.</p>
+            <p style="margin-bottom: 10px;"><strong>2. Paste Job Description:</strong> Copy the full text of the job you are applying to. This provides the AI keyword targets.</p>
+            <p style="margin-bottom: 10px;"><strong>3. Paste Base Resume:</strong> Provide your current master resume. The AI will extract your experience and rewrite it to match the job requirements.</p>
+            <p><strong>Note:</strong> All processing is done securely via the API. Your data is not stored on this portfolio website.</p>
+        </div>
+        <div style="text-align: right;">
+            <button id="close-modal-btn" class="btn btn-outline" style="padding: 8px 20px;">Close</button>
+        </div>
+    </dialog>
+
+    <script src="./ats.js"></script>
+</body>
+</html>
