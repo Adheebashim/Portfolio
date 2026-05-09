@@ -427,7 +427,7 @@ ${pageContext}
 - Location: Kerala, India (open to remote/global)
 - Highlight Projects: AI ATS Resume Optimizer (uses Gemini & Groq APIs), PowerPlus Electronics, CRM Facility Management.
 
-Keep your answers concise (1-3 paragraphs max) unless specifically asked for details. Always be helpful!`;
+Keep your answers conversational, professional, and ALWAYS restrict your responses to a medium length of 2-3 sentences maximum. Do not write essays. Always be helpful!`;
 
     // Maintain conversation history
     let conversationHistory = [];
@@ -509,7 +509,10 @@ Keep your answers concise (1-3 paragraphs max) unless specifically asked for det
 
         const requestBody = {
             system_instruction: { parts: [{ text: SYSTEM_CONTEXT }] },
-            contents: conversationHistory
+            contents: conversationHistory,
+            generationConfig: {
+                maxOutputTokens: 150
+            }
         };
 
         const response = await fetch(GEMINI_ENDPOINT, {
