@@ -20,8 +20,8 @@ function initParticleBackground() {
     let width, height;
     let particles = [];
     let mouse = { x: null, y: null };
-    // Reduce particle count significantly on mobile to drastically improve initial load time
-    const particleCount = window.innerWidth < 768 ? 30 : 60;
+    // Reduce particle count significantly on mobile to drastically improve initial load time and performance
+    const particleCount = window.innerWidth < 768 ? 15 : 60;
     const connectionDistance = 150;
     const mouseRadius = 250;
 
@@ -110,8 +110,14 @@ function initParticleBackground() {
         requestAnimationFrame(animate);
     }
 
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
-        resize();
+        // Only trigger resize if the actual screen width changes (fixes mobile scroll bar hiding bug)
+        if (window.innerWidth !== lastWidth) {
+            lastWidth = window.innerWidth;
+            resize();
+            init(); // Re-initialize particles to fit new screen
+        }
     });
 
     window.addEventListener('mousemove', (e) => {
