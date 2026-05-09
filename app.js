@@ -502,9 +502,6 @@ Keep your answers concise (1-3 paragraphs max) unless specifically asked for det
 
     // ── Gemini API call ──────────────────────────────────────────────────────
     async function getGeminiResponse(userMessage) {
-        if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-            return getRuleBasedResponse(userMessage);
-        }
 
         conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
