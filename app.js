@@ -405,11 +405,7 @@ function initChatbot() {
     const pageContext = extractPortfolioContext();
 
     // ── Gemini API config ──────────────────────────────────────────────────
-    const GEMINI_API_KEY = (typeof CREDENTIALS !== 'undefined' && CREDENTIALS.GEMINI_API_KEY)
-        ? CREDENTIALS.GEMINI_API_KEY
-        : null;
-
-    const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    const GEMINI_ENDPOINT = `https://portfolio-chat-proxy.adheebashim1010.workers.dev/`;
 
     // Expanded System Persona
     const SYSTEM_CONTEXT = `You are "Adheeb's AI", a highly intelligent, friendly, and persuasive virtual assistant embedded in Adheeb Ashim's personal portfolio website. 
