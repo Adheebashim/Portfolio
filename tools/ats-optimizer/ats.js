@@ -305,23 +305,22 @@ ${context ? `USER DIRECTIVES / ADDITIONAL CONTEXT:\n${context}\n` : ''}
 You are an expert career consultant. Write a modern, highly compelling Cover Letter for the provided Job Description based strictly on the candidate's Resume.
 
 CRITICAL INSTRUCTIONS (2025/2026 STANDARDS):
-1. Abandon the generic "To Whom It May Concern". Act as a modern Hiring Manager.
-2. The letter MUST be a maximum of 3 short paragraphs (under 250 words total).
-3. The first paragraph MUST immediately establish value by addressing the core pain point in the Job Description. No fluff.
-4. Highlight exactly 2 specific data metrics or achievements from the resume tied directly to that core pain point.
-5. Do NOT regurgitate the entire resume or list soft skills without evidence.
-6. You MUST output the ENTIRE cover letter exclusively as a raw JSON object string without any markdown wrappers.
+1. ATS KEYWORD INJECTION: You MUST extract 4-5 hard technical keywords (tools, frameworks, methodologies) from the Job Description and organically weave them into the letter to guarantee an ATS match.
+2. NO FLUFF, NO WEAKNESS: Eliminate "I believe", "I feel", or "I hope". Write with absolute executive confidence. Address the core business need of the role immediately in the first paragraph.
+3. SCANNABLE BULLET POINTS: Modern managers scan; they do not read blocks of text. The body of the letter MUST be formatted as a short introductory sentence followed by 3 high-impact, quantified bullet points extracted from the resume that prove capability.
+4. ONE PAGE RULE: The letter must be under 250 words total.
+5. JSON STRICTNESS: Output the ENTIRE cover letter exclusively as a raw JSON object string without any markdown wrappers.
 
 JSON STRUCTURE TO EXACTLY FOLLOW:
 {
   "name": "[Candidate Name]",
-  "contact": "[Phone | Email | LinkedIn]",
+  "contact": "[Phone | Email | LinkedIn | Portfolio]",
   "date": "${currentDate}",
   "recipient": "[Hiring Manager or 'Hiring Team'], [Company Name]",
   "paragraphs": [
-    "[Value-first opening paragraph addressing the specific role immediately]",
-    "[Body paragraph highlighting 2 specific relevant mapped achievements]",
-    "[Closing paragraph with a confident call to action]"
+    "[Value-first opening paragraph addressing the specific role and core business need immediately]",
+    "Here is a snapshot of my impact:<br><br>• [Quantifiable Bullet 1]<br>• [Quantifiable Bullet 2]<br>• [Quantifiable Bullet 3]",
+    "[Confident closing paragraph with a soft call-to-action]"
   ]
 }
 
@@ -339,22 +338,22 @@ ${context ? `USER DIRECTIVES / ADDITIONAL CONTEXT:\n${context}\n` : ''}
 You are an expert executive recruiter. Write a highly targeted, direct Cold Email to the hiring manager for the provided Job Description based strictly on the candidate's Resume.
 
 CRITICAL INSTRUCTIONS (2025/2026 "LOW-FRICTION" RULES):
-1. Word Count: Hard limit of 125 words max. Be ruthless with editing.
-2. Subject Line (The Gatekeeper): Must be 4-7 words, human-sounding, and curious (e.g., "Quick question regarding [Company] engineering"). Do not use clickbait.
-3. The Hook & Value Prop: Do NOT say "I am writing to apply". Instantly inject one single, powerful, and hyper-relevant achievement/metric from the resume that solves the core need in the Job Description.
-4. The Ask (Low-Friction): End with a pressure-free, soft call-to-action (e.g., "Would you be open to a brief 10-minute chat next week to share your perspective?"). Never ask for a job directly.
-5. No Marketing: Eliminate buzzwords, exclamation points, and fluff.
-6. You MUST output exclusively as a raw JSON object string without any markdown wrappers.
+1. THE GATEKEEPER: Subject line MUST be 4-7 words, highly personalized, and non-salesy (e.g., "Quick question regarding [Company] engineering goals").
+2. THE HOOK (PAIN POINT): Start by acknowledging a specific business goal or challenge implied by the Job Description. Do NOT say "I am writing to apply". 
+3. THE UNFAIR ADVANTAGE: Inject exactly ONE powerful, quantified metric/achievement from the resume that proves the candidate can instantly solve their pain point.
+4. THE LOW-FRICTION ASK: End with a pressure-free, soft call-to-action (e.g., "Would you be open to a quick exchange of notes via email next week?"). Never ask for a job or a phone call immediately.
+5. EXECUTIVE BREVITY: Hard limit of 100 words max. Be ruthless.
+6. JSON STRICTNESS: Output exclusively as a raw JSON object string without any markdown wrappers.
 
 JSON STRUCTURE TO EXACTLY FOLLOW:
 {
-  "subject_line": "[4-7 Word Subject Line]",
+  "subject_line": "[4-7 Word Curious Subject Line]",
   "salutation": "Hi [Hiring Manager Name / Team],",
   "paragraphs": [
-    "[The 2-sentence hook and single power-metric value prop]",
+    "[The 2-sentence hook addressing their pain point and your single power-metric value prop]",
     "[The 1-sentence low-friction call to action]"
   ],
-  "sign_off": "Best,<br><br>[Candidate Name]<br>[Link to Profile]"
+  "sign_off": "Best,<br><br>[Candidate Name]<br>[Link to Portfolio/LinkedIn]"
 }
 
 JOB DESCRIPTION:
@@ -421,14 +420,36 @@ ${context ? `USER DIRECTIVES / ADDITIONAL CONTEXT:\n${context}\n` : ''}
 
         const promptText = genType === 'cover-letter' ? buildCoverLetterPrompt(jd, resume, context) : genType === 'cold-email' ? buildColdEmailPrompt(jd, resume, context) : buildResumePrompt(jd, resume, context);
 
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const originalText = btnText.textContent;
+        const originalIcon = btnIcon.className;
+
         generateBtn.disabled = true;
         loader.style.display = 'inline-block';
+        btnIcon.style.display = 'none';
         outputContainer.style.display = 'none';
+        
+        // Simulated Progress Counter
+        let progress = 0;
+        btnText.textContent = `Optimizing... 0%`;
+        const progressInterval = setInterval(() => {
+            progress += Math.floor(Math.random() * 5) + 1;
+            if (progress > 95) progress = 95; // Cap at 95% until API responds
+            btnText.textContent = `Optimizing... ${progress}%`;
+        }, 400);
         
         try {
             if (provider === 'gemini') rawMarkdownOutput = await callGemini(apiKey, promptText, selectedModel);
             else if (provider === 'groq') rawMarkdownOutput = await callGroq(apiKey, promptText, selectedModel);
             else if (provider === 'cohere') rawMarkdownOutput = await callCohere(apiKey, promptText, selectedModel);
+            
+            // API Responded Successfully - Snap to 100%
+            clearInterval(progressInterval);
+            btnText.textContent = `Optimization 100% Complete!`;
+            loader.style.display = 'none';
+            btnIcon.className = 'bx bx-check';
+            btnIcon.style.display = 'inline-block';
             
             // Clean any potential JSON wrappers the LLM might have ignored instructions and added anyway
             rawMarkdownOutput = rawMarkdownOutput.replace(/^```json\n/gmi, '').replace(/^```\n?/gm, '').trim();
@@ -518,11 +539,22 @@ ${context ? `USER DIRECTIVES / ADDITIONAL CONTEXT:\n${context}\n` : ''}
                 outputContainer.scrollIntoView({ behavior: 'smooth' });
             }, 50);
         } catch (err) {
+            clearInterval(progressInterval);
+            btnText.textContent = originalText;
+            btnIcon.style.display = 'inline-block';
+            loader.style.display = 'none';
+            
             console.error(err);
             errorMsg.textContent = err.message || "An error occurred while generating the content.";
         } finally {
-            generateBtn.disabled = false;
-            loader.style.display = 'none';
+            // Keep the 100% Complete text for 3 seconds before resetting the button
+            setTimeout(() => {
+                generateBtn.disabled = false;
+                btnText.textContent = originalText;
+                btnIcon.className = originalIcon;
+                loader.style.display = 'none';
+                btnIcon.style.display = 'inline-block';
+            }, 3000);
         }
     });
 

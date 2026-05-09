@@ -20,7 +20,8 @@ function initParticleBackground() {
     let width, height;
     let particles = [];
     let mouse = { x: null, y: null };
-    const particleCount = 80;
+    // Reduce particle count significantly on mobile to drastically improve initial load time
+    const particleCount = window.innerWidth < 768 ? 30 : 60;
     const connectionDistance = 150;
     const mouseRadius = 250;
 
@@ -283,11 +284,24 @@ function initCardGlowEffect() {
             const rotateX = (y - centerY) / 30;
             const rotateY = (centerX - x) / 30;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            gsap.to(card, {
+                rotationX: rotateX,
+                rotationY: rotateY,
+                y: -4,
+                duration: 0.1,
+                ease: "none",
+                transformPerspective: 1000
+            });
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
+            gsap.to(card, {
+                rotationX: 0,
+                rotationY: 0,
+                y: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            });
         });
     });
 

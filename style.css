@@ -658,6 +658,18 @@ ul {
     object-fit: cover;
     object-position: center;
     filter: grayscale(80%) contrast(1.1);
+    animation: atmosphericBreathe 8s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphericBreathe {
+    0% {
+        transform: scale(1);
+        filter: grayscale(80%) contrast(1.1) brightness(1);
+    }
+    100% {
+        transform: scale(1.06);
+        filter: grayscale(80%) contrast(1.1) brightness(1.15);
+    }
 }
 
 /* Floating Animations (retained if needed for future) */
@@ -849,7 +861,7 @@ ul {
     /* Increased top padding */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: var(--transition);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
     position: relative;
     overflow: hidden;
 }
@@ -987,7 +999,7 @@ ul {
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 40px;
-    transition: var(--transition);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
     display: flex;
     flex-direction: column;
     position: relative;
