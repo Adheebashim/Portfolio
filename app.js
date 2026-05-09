@@ -487,8 +487,14 @@ Keep your answers concise (1-3 paragraphs max) unless specifically asked for det
             await typeWriterAppend(reply, 'ai-message');
         } catch (err) {
             removeTypingIndicator();
-            appendMessage("Sorry, I'm having a little trouble right now. Please reach out to Adheeb directly at [adheebashim1010@gmail.com](mailto:adheebashim1010@gmail.com)! 😊", 'ai-message');
             console.error('Chatbot error:', err);
+            
+            // Surface specific API configuration errors to the UI for debugging
+            if (err.message && err.message.includes('API key')) {
+                appendMessage(`⚠️ **Configuration Error:** ${err.message}. Please check your Cloudflare Environment Variables.`, 'ai-message');
+            } else {
+                appendMessage("Sorry, I'm having a little trouble right now. Please reach out to Adheeb directly at [adheebashim1010@gmail.com](mailto:adheebashim1010@gmail.com)! 😊", 'ai-message');
+            }
         } finally {
             sendBtn.disabled = false;
             chatInput.focus();
@@ -521,6 +527,11 @@ Keep your answers concise (1-3 paragraphs max) unless specifically asked for det
         }
 
         const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error.message || "Unknown API Error from Cloudflare/Google");
+        }
+        
         const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm not sure how to answer that — feel free to email Adheeb directly!";
 
         conversationHistory.push({ role: 'model', parts: [{ text: aiText }] });
