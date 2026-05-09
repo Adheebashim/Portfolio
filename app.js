@@ -489,12 +489,8 @@ Keep your answers concise (1-3 paragraphs max) unless specifically asked for det
             removeTypingIndicator();
             console.error('Chatbot error:', err);
             
-            // Surface specific API configuration errors to the UI for debugging
-            if (err.message && err.message.includes('API key')) {
-                appendMessage(`⚠️ **Configuration Error:** ${err.message}. Please check your Cloudflare Environment Variables.`, 'ai-message');
-            } else {
-                appendMessage("Sorry, I'm having a little trouble right now. Please reach out to Adheeb directly at [adheebashim1010@gmail.com](mailto:adheebashim1010@gmail.com)! 😊", 'ai-message');
-            }
+            // Temporary debugging: Print the exact raw error message to the UI
+            appendMessage(`⚠️ **Debug Error:** ${err.message}`, 'ai-message');
         } finally {
             sendBtn.disabled = false;
             chatInput.focus();
