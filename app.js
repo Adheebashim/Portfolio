@@ -517,7 +517,7 @@ Keep your answers conversational, professional, and ALWAYS restrict your respons
             system_instruction: { parts: [{ text: SYSTEM_CONTEXT }] },
             contents: conversationHistory,
             generationConfig: {
-                maxOutputTokens: 150
+                maxOutputTokens: 500
             }
         };
 
