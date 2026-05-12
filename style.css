@@ -306,14 +306,21 @@ ul {
     z-index: -1;
 }
 
-.btn:hover::after {
-    width: 300px;
-    height: 300px;
+@media (hover: hover) {
+    .btn:hover::after {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.25);
+.btn:active {
+    transform: scale(0.96);
+    transition: transform 0.1s;
 }
 
 .btn-primary {
@@ -323,9 +330,11 @@ ul {
     box-shadow: 0 4px 20px rgba(0, 209, 255, 0.15);
 }
 
-.btn-primary:hover {
-    box-shadow: 0 8px 40px rgba(0, 209, 255, 0.35);
-    background: linear-gradient(135deg, rgba(0, 209, 255, 0.3) 0%, rgba(122, 92, 255, 0.3) 100%);
+@media (hover: hover) {
+    .btn-primary:hover {
+        box-shadow: 0 8px 40px rgba(0, 209, 255, 0.35);
+        background: linear-gradient(135deg, rgba(0, 209, 255, 0.3) 0%, rgba(122, 92, 255, 0.3) 100%);
+    }
 }
 
 .btn-secondary {
@@ -334,9 +343,11 @@ ul {
     border: none;
 }
 
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+@media (hover: hover) {
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .btn-outline {
@@ -346,10 +357,12 @@ ul {
     color: var(--text-main);
 }
 
-.btn-outline:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.4) !important;
+@media (hover: hover) {
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.4) !important;
+    }
 }
 
 .btn-large {
@@ -365,8 +378,10 @@ ul {
     box-shadow: 0 4px 20px rgba(0, 209, 255, 0.2);
 }
 
-.btn-glow:hover {
-    box-shadow: 0 8px 40px rgba(0, 209, 255, 0.4);
+@media (hover: hover) {
+    .btn-glow:hover {
+        box-shadow: 0 8px 40px rgba(0, 209, 255, 0.4);
+    }
 }
 
 /* --- Typography --- */
@@ -1626,6 +1641,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    pointer-events: none;
 }
 
 .chatbot-fab {
@@ -1643,6 +1659,7 @@ ul {
     cursor: pointer;
     transition: var(--transition);
     z-index: 1051;
+    pointer-events: auto;
 }
 
 .chatbot-fab:hover {

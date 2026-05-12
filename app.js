@@ -602,8 +602,10 @@ Keep your answers conversational, professional, and ALWAYS restrict your respons
         async function typeNode(node, parent) {
             if (node.nodeType === Node.TEXT_NODE) {
                 const textStr = node.textContent;
-                for (let i = 0; i < textStr.length; i++) {
-                    parent.appendChild(document.createTextNode(textStr[i]));
+                // Safely iterate over code points (supports emojis)
+                const chars = Array.from(textStr);
+                for (let i = 0; i < chars.length; i++) {
+                    parent.appendChild(document.createTextNode(chars[i]));
                     scrollToBottom();
                     // Fast typing speed
                     await new Promise(r => setTimeout(r, 8));
@@ -615,14 +617,17 @@ Keep your answers conversational, professional, and ALWAYS restrict your respons
                     newEl.setAttribute(attr.name, attr.value);
                 }
                 parent.appendChild(newEl);
-                for (let child of node.childNodes) {
+                // Convert live NodeList to array to prevent iteration issues
+                const children = Array.from(node.childNodes);
+                for (let child of children) {
                     await typeNode(child, newEl);
                 }
             }
         }
 
         // Start typing
-        for (let child of tempDiv.childNodes) {
+        const topLevelChildren = Array.from(tempDiv.childNodes);
+        for (let child of topLevelChildren) {
             await typeNode(child, contentDiv);
         }
     }
