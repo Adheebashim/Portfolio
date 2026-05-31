@@ -260,7 +260,7 @@ ul {
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -268,7 +268,7 @@ ul {
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* --- Buttons --- */
@@ -1458,6 +1458,8 @@ ul {
         backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
+        align-items: center;
+        text-align: center;
         gap: 40px;
         padding: 40px;
         transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1466,6 +1468,11 @@ ul {
 
     .nav-links.active {
         right: 0;
+    }
+
+    .nav-links a:not(.btn) {
+        font-size: 1.2rem;
+        font-weight: 600;
     }
 
     .nav-links a:not(.btn)::after {
@@ -1482,6 +1489,11 @@ ul {
 
     .hero-roles {
         justify-content: center;
+        gap: 8px 16px;
+    }
+
+    .hero-role-dot {
+        display: none;
     }
 
     .hero-name-main {
@@ -1491,13 +1503,14 @@ ul {
 
     .hero-split {
         grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 40px 0;
+        gap: 32px;
+        padding: 24px 0 60px;
         text-align: center;
     }
 
     .hero-left {
         align-items: center;
+        order: 2;
     }
 
     .hero-desc {
@@ -1507,7 +1520,15 @@ ul {
     }
 
     .hero-right {
-        display: none;
+        display: flex;
+        justify-content: center;
+        order: 1;
+        margin-bottom: 16px;
+    }
+
+    .profile-showcase {
+        max-width: 260px;
+        margin: 0 auto;
     }
 
     .hero-metrics {
@@ -1517,6 +1538,34 @@ ul {
 
     .hero-title {
         align-items: center;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-header {
+        margin-bottom: 32px;
+    }
+
+    .project-card, .service-card {
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .cta-box {
+        padding: 48px 20px;
+        border-radius: 24px;
+    }
+
+    .modal-overlay {
+        padding: 20px;
+    }
+
+    .modal-content {
+        padding: 32px 20px;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .timeline::before {
@@ -1533,7 +1582,9 @@ ul {
 
     .stats-row {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: 20px;
+        padding: 40px 0;
+        margin-bottom: 40px;
     }
 
     .stat-number {
@@ -1546,10 +1597,12 @@ ul {
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 

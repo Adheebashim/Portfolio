@@ -155,8 +155,13 @@ function initHamburgerMenu() {
     if (!hamburger || !navLinks) return;
 
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
+        const isActive = hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        if (isActive) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
 
     // Close menu on link click
@@ -164,7 +169,19 @@ function initHamburgerMenu() {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navLinks.classList.remove('active');
+            document.body.style.overflow = '';
         });
+    });
+
+    // Close menu when clicking outside of nav-links and hamburger
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 }
 
@@ -273,6 +290,9 @@ function initStatsCounter() {
 
 // --- Interactive Card Glow Effect & 3D Tilt ---
 function initCardGlowEffect() {
+    // Disable hover tilt on touch devices
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const cards = document.querySelectorAll('.service-card, .project-card');
 
     cards.forEach(card => {
